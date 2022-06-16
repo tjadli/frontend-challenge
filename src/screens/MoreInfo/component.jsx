@@ -37,8 +37,8 @@ export default function MoreInfoComponent({
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Check type="checkbox" isInvalid={terms.hasError}>
-                <Form.Check.Input type="checkbox" name="terms" checked={terms.value ?? 'checked'} onChange={handleFormData} />
+              <Form.Check type="checkbox">
+                <Form.Check.Input isInvalid={terms.hasError} type="checkbox" name="terms" checked={terms.value ?? 'checked'} onChange={handleFormData} />
                 <Form.Check.Label name="terms">
                   {'I Agree to '}
                   {' '}
@@ -49,11 +49,9 @@ export default function MoreInfoComponent({
 
               {terms.hasError ? (
                 <Form.Text style={{ color: 'red' }}>
-                  This is a required field
+                  You have to accept the terms and conditions
                 </Form.Text>
-              ) : (
-                ''
-              )}
+              ) : ''}
             </Form.Group>
             <>
               <Button variant="secondary" onClick={handlePrevious}>

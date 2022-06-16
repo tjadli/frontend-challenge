@@ -4,16 +4,20 @@ import { useNavigate } from 'react-router-dom';
 import { useFormContext } from '../../context/FormContext';
 import MoreInfoComponent from './component';
 
-export default function MoreInfo(values = {}) {
-  const { form: { color, terms }, setFormValue, colors } = useFormContext();
+export default function MoreInfo() {
+  const {
+    form: { color, terms }, setFormValue, colors, validateForm,
+  } = useFormContext();
 
   const navigate = useNavigate();
 
   const submitFormData = (e) => {
     e.preventDefault();
-    if (!values.favoriteColor || !values.agreement) {
-      navigate('/confirmation');
+    if (!validateForm(['color', 'terms'])) {
+      return;
     }
+
+    navigate('/confirmation');
   };
 
   const handlePrevious = (e) => {
