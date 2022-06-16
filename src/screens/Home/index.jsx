@@ -6,14 +6,14 @@ import HomeComponent from './component';
 
 export default function HomeHook() {
   const navigate = useNavigate();
-  const { form: { name, email, password }, setFormValue } = useFormContext();
+  const { form: { name, email, password }, setFormValue, validateForm } = useFormContext();
 
   const handleNext = (e) => {
     e.preventDefault();
-
-    if (!name.value || !email.value || !password.value) {
+    if (!validateForm(['name', 'email', 'password'])) {
       return;
     }
+
     navigate('/more-info');
   };
 

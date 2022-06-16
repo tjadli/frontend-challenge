@@ -13,15 +13,18 @@ const initialState = {
     name: {
       value: '',
       hasError: false,
+      isRequired: true,
     },
     email: {
       value: '',
       hasError: false,
+      isRequired: true,
     },
     password: {
       value: '',
       isHashed: true,
       hasError: false,
+      isRequired: true,
     },
     color: {
       value: '',
@@ -63,6 +66,20 @@ function FormContextProvider({ children }) {
     navigate('/');
   };
 
+  const validateForm = (attrs) => {
+    const validatedForm = { ...form };
+    let valid = true;
+    attrs.forEach((attribute) => {
+      if (validatedForm[attribute].isRequired && !validatedForm[attribute].value) {
+        validatedForm[attribute].hasError = true;
+        valid = false;
+      }
+    });
+    setForm(validatedForm);
+
+    return valid;
+  };
+
   const setFormValue = ({
     target: {
       name, type, checked, value,
@@ -79,6 +96,7 @@ function FormContextProvider({ children }) {
       [name]: {
         ...form[name],
         value: formattedValue,
+        hasError: false,
       },
     });
   };
@@ -99,6 +117,7 @@ function FormContextProvider({ children }) {
     setFormValue,
     resetForm,
     submitForm,
+    validateForm,
   }), [colors, form, loading]);
 
   return (
