@@ -5,6 +5,8 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
+import { BASE_URL } from '../utils';
+
 const initialState = {
   colors: [],
   form: {
@@ -48,7 +50,7 @@ function FormContextProvider({ children }) {
         return acc;
       }, {});
 
-      await axios.post('http://localhost:3001/api/submit', data);
+      await axios.post(`${BASE_URL}api/submit`, data);
       navigate('/success');
     } catch (error) {
       // console.trace(error);
@@ -83,7 +85,7 @@ function FormContextProvider({ children }) {
 
   useEffect(() => {
     setLoading(true);
-    axios.get('http://localhost:3001/api/colors')
+    axios.get(`${BASE_URL}api/colors`)
       .then(({ data }) => {
         setLoading(false);
         setColors(data);
