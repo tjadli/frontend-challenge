@@ -8,6 +8,8 @@ function ConfirmationComponent({
   return (
     <Card style={{ marginTop: 100, textAlign: 'left' }}>
       <Card.Body>
+        <Card.Title>Confirmation</Card.Title>
+
         <p>
           <strong>Name : </strong>
           {data.name.value}
@@ -25,13 +27,10 @@ function ConfirmationComponent({
           {data.color.value}
         </p>
         <p>
-          <strong>terms : </strong>
-          Terms and conditions
+          <strong>Terms and conditions : </strong>
           {' '}
           {data.terms.value ? 'AGREED' : 'REJECTED'}
         </p>
-      </Card.Body>
-      <Card.Footer>
         <Button variant="secondary" onClick={handleBack}>
           Back
         </Button>
@@ -53,7 +52,7 @@ function ConfirmationComponent({
             ) : 'Submit'}
 
         </Button>
-      </Card.Footer>
+      </Card.Body>
     </Card>
   );
 }

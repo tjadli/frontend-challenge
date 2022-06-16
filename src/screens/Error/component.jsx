@@ -8,6 +8,7 @@ export default function ErrorComponent({ handleReset }) {
 
     <Card style={{ marginTop: 100, textAlign: 'left' }}>
       <Card.Body>
+        <Card.Title>Error</Card.Title>
         <Alert variant="danger">
           Uh oh, Something went wrong, please try again later
         </Alert>

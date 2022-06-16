@@ -10,6 +10,7 @@ export default function MoreInfoComponent({
     <div>
       <Card style={{ marginTop: 100 }}>
         <Card.Body>
+          <Card.Title>Additional Info</Card.Title>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Favorite Color</Form.Label>
