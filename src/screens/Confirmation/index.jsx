@@ -14,7 +14,7 @@ export default function Confirmation() {
     submitForm();
   };
   const handleBack = () => {
-    navigate('/');
+    navigate('/more-info');
   };
   return (
     <ConfirmationComponent
