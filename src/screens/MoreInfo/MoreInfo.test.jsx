@@ -39,15 +39,15 @@ const createWrapper = (updatedState = {}) => {
     },
 
   };
-
+  const state = mergeWith(defaultState, updatedState);
   const wrapper = render(
-    <Provider store={configureMockStore(mergeWith(defaultState, updatedState))}>
+    <Provider store={configureMockStore(state)}>
       <BrowserRouter>
         <Component />
       </BrowserRouter>
     </Provider>,
   );
-  return { wrapper, user };
+  return { wrapper, state, user };
 };
 
 describe('<MoreInfo/>', () => {
@@ -85,13 +85,24 @@ describe('<MoreInfo/>', () => {
     expect(await findByText(termsWrapper, 'You have to accept the terms and conditions')).toBeTruthy();
   });
 
-  it('doens\'t render errors context values', () => {
-    createWrapper();
+  it('doens\'t render errors ', () => {
+    createWrapper({
+      form: {
+        color: {
+          value: 'blue',
+          hasError: false,
+        },
+        terms: {
+          value: true,
+          hasError: false,
+        },
+      },
+    });
 
     const colorWrapper = screen.getByRole('option', { selected: true }).closest('div');
     const termsWrapper = screen.getByRole('checkbox').closest('.mb-3');
 
-    expect(findByText(colorWrapper, 'This is a required field')).toBeFalsy();
+    expect(queryByText(colorWrapper, 'This is a required field')).toBeFalsy();
     expect(queryByText(termsWrapper, 'You have to accept the terms and conditions')).toBeFalsy();
   });
 
