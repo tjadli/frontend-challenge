@@ -9,6 +9,7 @@ import { BASE_URL } from '../utils';
 
 const initialState = {
   colors: [],
+  loading: false,
   form: {
     name: {
       value: '',
@@ -29,15 +30,21 @@ const initialState = {
     color: {
       value: '',
       hasError: false,
+      isRequired: true,
     },
     terms: {
       value: false,
       hasError: false,
+
     },
   },
+  setFormValue: () => {},
+  resetForm: () => {},
+  submitForm: () => {},
+  validateForm: () => {},
 };
 
-const FormContext = React.createContext(initialState);
+const FormContext = React.createContext();
 
 function FormContextProvider({ children }) {
   const navigate = useNavigate();
@@ -75,6 +82,7 @@ function FormContextProvider({ children }) {
         valid = false;
       }
     });
+
     setForm(validatedForm);
 
     return valid;
@@ -105,8 +113,9 @@ function FormContextProvider({ children }) {
     setLoading(true);
     axios.get(`${BASE_URL}api/colors`)
       .then(({ data }) => {
-        setLoading(false);
         setColors(data);
+      }).finally(() => {
+        setLoading(false);
       });
   }, []);
 
