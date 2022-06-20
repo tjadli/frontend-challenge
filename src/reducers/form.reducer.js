@@ -1,5 +1,5 @@
 import {
-  RESET_FORM,
+  CLEAR_FORM,
   SET_FORM_VALUE,
   UPDATE_FORM,
 } from '../actions/form.actions';
@@ -29,7 +29,6 @@ export const initialState = {
   terms: {
     value: false,
     hasError: false,
-
   },
 };
 
@@ -51,7 +50,7 @@ export default function form(
       };
     case UPDATE_FORM:
       return { ...state, ...action.payload };
-    case RESET_FORM:
+    case CLEAR_FORM:
       return { ...initialState };
 
     default:

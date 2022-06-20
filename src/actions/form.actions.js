@@ -5,7 +5,7 @@ import { resetStep } from './step.actions';
 
 export const SET_FORM_VALUE = 'SET_FORM_VALUE';
 export const UPDATE_FORM = 'UPDATE_FORM';
-export const RESET_FORM = 'RESET_FORM';
+export const CLEAR_FORM = 'CLEAR_FORM';
 
 export function setFormValue({
   target: {
@@ -61,14 +61,14 @@ export const submitForm = () => async (dispatch, getState) => {
     dispatch(setLoading(false));
   } catch (error) {
     dispatch(setLoading(false));
-    console.trace(error);
     throw error;
   }
 };
 
-const clearForm = () => ({
-  type: RESET_FORM,
+export const clearForm = () => ({
+  type: CLEAR_FORM,
 });
+
 export const resetForm = () => (dispatch) => {
   dispatch(clearForm());
   dispatch(resetStep());
