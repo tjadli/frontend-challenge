@@ -1,72 +1,71 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Form, Card, Button } from 'react-bootstrap';
+import {
+  Form, Card, Button, FloatingLabel,
+} from 'react-bootstrap';
 
 export default function MoreInfoComponent({
   handleSubmit, handlePrevious, handleFormData, color, terms, colors,
 }) {
   return (
-    <div>
-      <Card style={{ marginTop: 100 }}>
-        <Card.Body>
-          <Card.Title>Additional Info</Card.Title>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label>Favorite Color</Form.Label>
-              <Form.Select
-                style={{ border: color.hasError ? '2px solid red' : '' }}
-                name="color"
-                placeholder="Select your favorite color"
-                onChange={handleFormData}
-                defaultValue={color.value}
-              >
-                <option value="">Select your favorite color</option>
-                {colors.map((clr) => (
-                  <option key={`${clr}`}>{clr}</option>
-                ))}
+    <>
+      <Card.Title>Additional Info</Card.Title>
+      <Form onSubmit={handleSubmit}>
+        <FloatingLabel className="mb-3" label="Favorite Color" controlId="color">
+          <Form.Select
+            style={{ border: color.hasError ? '2px solid red' : '' }}
+            name="color"
+            id="color"
+            placeholder="Select your favorite color"
+            onChange={handleFormData}
+            defaultValue={color.value}
+          >
+            <option value="">Select your favorite color</option>
+            {colors.map((clr) => (
+              <option key={`${clr}`}>{clr}</option>
+            ))}
 
-              </Form.Select>
-              {color.hasError ? (
-                <Form.Text style={{ color: 'red' }}>
-                  This is a required field
-                </Form.Text>
-              ) : (
-                ''
-              )}
-            </Form.Group>
+          </Form.Select>
+          {color.hasError ? (
+            <Form.Text style={{ color: 'red' }}>
+              This is a required field
+            </Form.Text>
+          ) : (
+            ''
+          )}
+        </FloatingLabel>
 
-            <Form.Group className="mb-3">
-              <Form.Check type="checkbox">
-                <Form.Check.Input isInvalid={terms.hasError} type="checkbox" name="terms" checked={terms.value ?? 'checked'} onChange={handleFormData} />
-                <Form.Check.Label name="terms">
-                  {'I Agree to '}
-                  {' '}
-                  <a href="/">Terms and conditions</a>
-                </Form.Check.Label>
-
-              </Form.Check>
-
-              {terms.hasError ? (
-                <Form.Text style={{ color: 'red' }}>
-                  You have to accept the terms and conditions
-                </Form.Text>
-              ) : ''}
-            </Form.Group>
-            <>
-              <Button variant="secondary" onClick={handlePrevious}>
-                Back
-              </Button>
+        <FloatingLabel className="mb-3">
+          <Form.Check type="checkbox">
+            <Form.Check.Input isInvalid={terms.hasError} type="checkbox" name="terms" checked={terms.value ?? 'checked'} onChange={handleFormData} />
+            <Form.Check.Label htmlFor="terms">
+              {'I Agree to '}
               {' '}
-              <Button variant="primary" type="submit">
-                Next
-              </Button>
-            </>
+              <a href="/">Terms and conditions</a>
+            </Form.Check.Label>
 
-          </Form>
-        </Card.Body>
-      </Card>
-    </div>
+          </Form.Check>
+
+          {terms.hasError ? (
+            <Form.Text style={{ color: 'red' }}>
+              You have to accept the terms and conditions
+            </Form.Text>
+          ) : ''}
+        </FloatingLabel>
+        <>
+          <Button variant="outline-secondary" onClick={handlePrevious}>
+            Back
+          </Button>
+          {' '}
+          <Button variant="outline-success" type="submit">
+            Next
+          </Button>
+        </>
+
+      </Form>
+
+    </>
   );
 }
 

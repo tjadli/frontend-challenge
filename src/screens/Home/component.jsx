@@ -1,78 +1,77 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Form, Card, Button } from 'react-bootstrap';
+import {
+  Form, Card, Button, FloatingLabel,
+} from 'react-bootstrap';
 
 function HomeComponent({
   name, email, password, handleFormData, handleNext,
 }) {
   return (
-    <div>
-      <Card style={{ marginTop: 100 }}>
-        <Card.Body>
-          <Card.Title>Sign Up</Card.Title>
-          <Form onSubmit={handleNext}>
-            <Form.Group className="mb-3">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                style={{ border: name.hasError ? '2px solid red' : '' }}
-                name="name"
-                defaultValue={name.value}
-                type="text"
-                placeholder="name"
-                onChange={handleFormData}
-              />
-              {name.hasError ? (
-                <Form.Text style={{ color: 'red' }}>
-                  This is a required field
-                </Form.Text>
-              ) : (
-                ''
-              )}
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                style={{ border: email.hasError ? '2px solid red' : '' }}
-                name="email"
-                defaultValue={email.value}
-                type="text"
-                placeholder="Email"
-                onChange={handleFormData}
-              />
-              {email.hasError ? (
-                <Form.Text style={{ color: 'red' }}>
-                  This is a required field
-                </Form.Text>
-              ) : (
-                ''
-              )}
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                style={{ border: password.hasError ? '2px solid red' : '' }}
-                name="password"
-                defaultValue={password.value}
-                type="password"
-                placeholder="Password"
-                onChange={handleFormData}
-              />
-              {password.hasError ? (
-                <Form.Text style={{ color: 'red' }}>
-                  This is a required field
-                </Form.Text>
-              ) : (
-                ''
-              )}
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Next
-            </Button>
-          </Form>
-        </Card.Body>
-      </Card>
-    </div>
+    <>
+      <Card.Title>Sign Up</Card.Title>
+      <Form onSubmit={handleNext}>
+        <FloatingLabel className="mb-3" controlId="name" label="Name">
+          <Form.Control
+            style={{ border: name.hasError ? '2px solid red' : '' }}
+            name="name"
+            defaultValue={name.value}
+            type="text"
+            placeholder="Name"
+            onChange={handleFormData}
+            aria-describedby="nameErrorBlock"
+          />
+          {name.hasError ? (
+            <Form.Text id="nameErrorBlock" style={{ color: 'red' }}>
+              This is a required field
+            </Form.Text>
+          ) : (
+            ''
+          )}
+        </FloatingLabel>
+        <FloatingLabel className="mb-3" controlId="email" label="Email">
+          <Form.Control
+            style={{ border: email.hasError ? '2px solid red' : '' }}
+            name="email"
+            defaultValue={email.value}
+            type="text"
+            placeholder="Email"
+            onChange={handleFormData}
+            aria-describedby="emailErrorBlock"
+          />
+          {email.hasError ? (
+            <Form.Text id="emailErrorBlock" style={{ color: 'red' }}>
+              This is a required field
+            </Form.Text>
+          ) : (
+            ''
+          )}
+        </FloatingLabel>
+        <FloatingLabel className="mb-3" controlId="password" label="Passowrd">
+          <Form.Control
+            style={{ border: password.hasError ? '2px solid red' : '' }}
+            name="password"
+            defaultValue={password.value}
+            type="password"
+            placeholder="Password"
+            onChange={handleFormData}
+            aria-describedby="passwordErrorBlock"
+          />
+          {password.hasError ? (
+            <Form.Text id="passwordErrorBlock" style={{ color: 'red' }}>
+              This is a required field
+            </Form.Text>
+          ) : (
+            ''
+          )}
+        </FloatingLabel>
+        <Button variant="outline-success" type="submit">
+          Next
+        </Button>
+      </Form>
+
+    </>
 
   );
 }

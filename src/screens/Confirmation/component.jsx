@@ -6,54 +6,54 @@ function ConfirmationComponent({
   data, loading, handleSubmit, handleBack,
 }) {
   return (
-    <Card style={{ marginTop: 100, textAlign: 'left' }}>
-      <Card.Body>
-        <Card.Title>Confirmation</Card.Title>
-
-        <p>
+    <>
+      <Card.Title>Confirmation</Card.Title>
+      <ul>
+        <li>
           <strong>Name : </strong>
           {data.name.value}
-        </p>
-        <p>
+        </li>
+        <li>
           <strong>Email : </strong>
           {data.email.value}
-        </p>
-        <p>
+        </li>
+        <li>
           <strong>Password : </strong>
           {data.password.isHashed ? '*'.repeat(data.password.value.length) : data.password.value}
-        </p>
-        <p>
+        </li>
+        <li>
           <strong>color : </strong>
           {data.color.value}
-        </p>
-        <p>
+        </li>
+        <li>
           <strong>Terms and conditions : </strong>
-          {' '}
           {data.terms.value ? 'AGREED' : 'REJECTED'}
-        </p>
-        <Button variant="secondary" onClick={handleBack}>
-          Back
-        </Button>
-        {' '}
-        <Button variant="primary " onClick={handleSubmit} disabled={loading}>
-          {loading
-            ? (
-              <>
-                <Spinner
-                  as="span"
-                  animation="border"
-                  size="sm"
-                  role="status"
-                  aria-hidden="true"
-                />
-                {' '}
-                Submiting...
-              </>
-            ) : 'Submit'}
+        </li>
+      </ul>
 
-        </Button>
-      </Card.Body>
-    </Card>
+      <Button variant="outline-secondary" onClick={handleBack}>
+        Back
+      </Button>
+      {' '}
+      <Button variant="outline-success " onClick={handleSubmit} disabled={loading}>
+        {loading
+          ? (
+            <>
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+              {' '}
+              Submiting...
+            </>
+          ) : 'Submit'}
+
+      </Button>
+    </>
+
   );
 }
 

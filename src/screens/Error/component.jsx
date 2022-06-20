@@ -5,20 +5,16 @@ import { Alert, Card, Button } from 'react-bootstrap';
 
 export default function ErrorComponent({ handleReset }) {
   return (
+    <>
+      <Card.Title>Error</Card.Title>
+      <Alert variant="danger">
+        Uh oh, Something went wrong, please try again later
+      </Alert>
+      <Button variant="outline-secondary" onClick={handleReset}>
+        Reset Form
+      </Button>
+    </>
 
-    <Card style={{ marginTop: 100, textAlign: 'left' }}>
-      <Card.Body>
-        <Card.Title>Error</Card.Title>
-        <Alert variant="danger">
-          Uh oh, Something went wrong, please try again later
-        </Alert>
-      </Card.Body>
-      <Card.Footer>
-        <Button variant="secondary" onClick={handleReset}>
-          Reset Form
-        </Button>
-      </Card.Footer>
-    </Card>
   );
 }
 
