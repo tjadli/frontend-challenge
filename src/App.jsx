@@ -1,29 +1,36 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-
+import Styled from 'styled-components';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import NavigationContainer from './Navigation';
 
-import FormContextProvider from './context/FormContext';
+import NavigationContainer from './Navigation';
+import configureStore from './store';
 
 function App() {
+  const { store } = configureStore();
+
   return (
 
-    <div className="App">
+    <Wrapper>
       <Container>
         <Row>
-          <Col md={{ span: 6, offset: 3 }} className="custom-margin">
+          <Col md={{ span: 10, offset: 1 }}>
             <BrowserRouter>
-              <FormContextProvider>
+              <Provider store={store}>
                 <NavigationContainer />
-              </FormContextProvider>
+              </Provider>
             </BrowserRouter>
           </Col>
         </Row>
       </Container>
-    </div>
+    </Wrapper>
 
   );
 }
 
+const Wrapper = Styled.div`
+  background-color: #ebeff2;
+  min-height: 100vh;
+`;
 export default App;
