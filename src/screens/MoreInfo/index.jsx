@@ -14,7 +14,7 @@ export default function MoreInfo() {
 
   const submitFormData = (e) => {
     e.preventDefault();
-    if (!validateForm(['color', 'terms'])) {
+    if (!dispatch(validateForm(['color', 'terms']))) {
       return;
     }
     dispatch(setStep(2));
