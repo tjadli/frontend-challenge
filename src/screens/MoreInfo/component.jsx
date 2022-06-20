@@ -20,6 +20,7 @@ export default function MoreInfoComponent({
             placeholder="Select your favorite color"
             onChange={handleFormData}
             defaultValue={color.value}
+            aria-describedby="colorErrorBlock"
           >
             <option value="">Select your favorite color</option>
             {colors.map((clr) => (
@@ -28,7 +29,7 @@ export default function MoreInfoComponent({
 
           </Form.Select>
           {color.hasError ? (
-            <Form.Text style={{ color: 'red' }}>
+            <Form.Text id="colorErrorBlock" style={{ color: 'red' }}>
               This is a required field
             </Form.Text>
           ) : (
@@ -37,18 +38,17 @@ export default function MoreInfoComponent({
         </FloatingLabel>
 
         <FloatingLabel className="mb-3">
-          <Form.Check type="checkbox">
+          <Form.Check type="checkbox" aria-describedby="termsErrorBlock">
             <Form.Check.Input isInvalid={terms.hasError} type="checkbox" name="terms" checked={terms.value ?? 'checked'} onChange={handleFormData} />
             <Form.Check.Label htmlFor="terms">
               {'I Agree to '}
-              {' '}
               <a href="/">Terms and conditions</a>
             </Form.Check.Label>
 
           </Form.Check>
 
           {terms.hasError ? (
-            <Form.Text style={{ color: 'red' }}>
+            <Form.Text style={{ color: 'red' }} id="termsErrorBlock">
               You have to accept the terms and conditions
             </Form.Text>
           ) : ''}
