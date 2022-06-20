@@ -1,14 +1,21 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { resetForm } from '../../actions/form.actions';
 
-import { useFormContext } from '../../context/FormContext';
 import SuccessComponent from './component';
 
 export default function Success() {
-  const { resetForm } = useFormContext();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const handleReset = () => {
+    dispatch(resetForm());
+    navigate('/');
+  };
   return (
     <SuccessComponent
-      handleReset={resetForm}
+      handleReset={handleReset}
     />
   );
 }

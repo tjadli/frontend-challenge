@@ -1,14 +1,15 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { setFormValue, validateForm } from '../../actions/form.actions';
+import { setStep } from '../../actions/step.actions';
 
-import { useFormContext } from '../../context/FormContext';
 import MoreInfoComponent from './component';
 
 export default function MoreInfo() {
-  const {
-    form: { color, terms }, setFormValue, colors, validateForm,
-  } = useFormContext();
-
+  const { color, terms } = useSelector((state) => state.form);
+  const colors = useSelector((state) => state.colors);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const submitFormData = (e) => {
@@ -16,7 +17,7 @@ export default function MoreInfo() {
     if (!validateForm(['color', 'terms'])) {
       return;
     }
-
+    dispatch(setStep(2));
     navigate('/confirmation');
   };
 
@@ -29,7 +30,7 @@ export default function MoreInfo() {
     <MoreInfoComponent
       handlePrevious={handlePrevious}
       handleSubmit={submitFormData}
-      handleFormData={setFormValue}
+      handleFormData={(e) => dispatch(setFormValue(e))}
       color={color}
       colors={colors}
       terms={terms}
