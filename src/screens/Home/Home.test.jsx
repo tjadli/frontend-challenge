@@ -83,7 +83,7 @@ describe('<Home/>', () => {
     expect(passwordValue).toBe(form.password.value);
   });
 
-  it('renders errors context values', async () => {
+  it('renders errors ', async () => {
     const { wrapper } = createWrapper({
       form: {
         name: { hasError: true },
@@ -101,13 +101,25 @@ describe('<Home/>', () => {
     expect(await findByText(passwordWrapper, 'This is a required field')).toBeTruthy();
   });
 
-  it('doens\'t render errors context values', () => {
-    const { wrapper } = createWrapper();
+  it('doens\'t render errors', () => {
+    const { wrapper } = createWrapper({
+      form: {
+        name: {
+          hasError: false,
+        },
+        email: {
+          hasError: false,
+        },
+        password: {
+          hasError: false,
+        },
+      },
+    });
 
     const nameWrapper = screen.getByPlaceholderText('Name').closest('div');
     const emailWrapper = wrapper.getByPlaceholderText('Email').closest('div');
     const passwordWrapper = wrapper.getByPlaceholderText('Password').closest('div');
-
+    console.log(passwordWrapper.innerHTML);
     expect(queryByText(nameWrapper, 'This is a required field')).toBeFalsy();
     expect(queryByText(emailWrapper, 'This is a required field')).toBeFalsy();
     expect(queryByText(passwordWrapper, 'This is a required field')).toBeFalsy();
@@ -172,9 +184,7 @@ describe('<Home/>', () => {
         password: { value: '' },
       },
     });
-    mockDispatch.mockImplementationOnce((args) => {
-      console.log('DISPATCHING', args);
-    });
+    mockDispatch.mockImplementationOnce(() => false);
     await user.click(wrapper.getByText('Next'));
     expect(mockNavigation).not.toHaveBeenCalled();
   });
